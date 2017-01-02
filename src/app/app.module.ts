@@ -8,6 +8,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { QuizzesComponent } from './quizzes';
 import { QuizDetailComponent, NumberCorrectPipe } from './quiz-detail';
+import { QuizProgressComponent } from './quiz-progress';
 
 import { QuizService } from './quiz.service';
 import { ProgressService } from './progress.service';
@@ -23,6 +24,7 @@ import { ProgressService } from './progress.service';
     AppComponent,
     QuizzesComponent,
     QuizDetailComponent,
+    QuizProgressComponent,
     NumberCorrectPipe,
   ],
   providers: [

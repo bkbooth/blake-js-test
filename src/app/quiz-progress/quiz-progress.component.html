@@ -1,0 +1,30 @@
+<h2>Quiz Progress</h2>
+
+<div *ngIf="progress?.current_quiz_id">
+  <p>
+    You have completed
+    <strong>{{ progress?.scores.length }}</strong>
+    out of
+    <strong>{{ quizzes?.length }}</strong>
+    quizzes.
+  </p>
+
+  <p *ngFor="let score of progress?.scores">
+    For
+    <strong>{{ getQuizById(score.quiz_id)?.title }}</strong>,
+    you scored
+    <strong>{{ score.score }}</strong>
+    out of
+    <strong>{{ getQuizById(score.quiz_id)?.question_ids.length }}</strong>
+  </p>
+</div>
+
+<div *ngIf="!progress?.current_quiz_id">
+  <p>
+    It looks like you haven't completed any quizzes yet. Please go back and make a start.
+  </p>
+</div>
+
+<p>
+  <a [routerLink]="['/quizzes']">&laquo; Back to quizzes</a>
+</p>

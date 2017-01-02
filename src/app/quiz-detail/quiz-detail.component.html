@@ -1,7 +1,7 @@
-<h2>{{ (quiz$ | async)?.title }}</h2>
+<h2>{{ quiz.title }}</h2>
 
 <form (ngSubmit)="quizForm.valid && onQuizSubmit()" #quizForm="ngForm">
-  <p *ngFor="let question of questions$ | async; let i = index;">
+  <p *ngFor="let question of questions; let i = index;">
     <label for="question{{ question.id }}">{{ i + 1 }}. {{ question.question }}</label><br>
 
     <span *ngFor="let answer of question.answers; let j = index;">
@@ -31,6 +31,11 @@
   <p *ngIf="quizForm.submitted && quizForm.invalid"
      class="has-error">
     Please answer all questions before submitting
+  </p>
+
+  <p *ngIf="answersSubmitted">
+    Your score for this quiz:
+    {{ questions | numberCorrect }}/{{ questions.length }}
   </p>
 
   <button type="submit"

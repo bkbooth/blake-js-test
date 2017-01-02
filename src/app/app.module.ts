@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { QuizzesComponent } from './quizzes';
-import { QuizDetailComponent } from './quiz-detail';
+import { QuizDetailComponent, NumberCorrectPipe } from './quiz-detail';
 import { QuizService } from './quiz.service';
 
 @NgModule({
@@ -20,6 +20,7 @@ import { QuizService } from './quiz.service';
     AppComponent,
     QuizzesComponent,
     QuizDetailComponent,
+    NumberCorrectPipe,
   ],
   providers: [
     QuizService,

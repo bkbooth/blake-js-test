@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 import { QuizService } from '../quiz.service';
 import { Quiz } from '../quiz';
@@ -16,7 +15,7 @@ export class QuizDetailComponent implements OnChanges {
   @Output() complete: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild(NgForm) quizForm;
 
-  public questions$: Observable<Question[]>;
+  public questions: Question[];
   public answersSubmitted: boolean;
 
   constructor(
@@ -24,8 +23,11 @@ export class QuizDetailComponent implements OnChanges {
   ) { }
 
   ngOnChanges(): void {
+    this.quizService.getQuestions(this.quiz.question_ids)
+      .first()
+      .subscribe((questions: Question[]) => this.questions = questions);
+
     this.quizForm.resetForm();
-    this.questions$ = this.quizService.getQuestions(this.quiz.question_ids);
     this.answersSubmitted = false;
   }
 

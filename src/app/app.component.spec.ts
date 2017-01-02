@@ -25,4 +25,8 @@ describe('AppComponent', () => {
     let compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Blake JS Test');
   }));
+
+  // TODO: add real tests
+  // I started with the best intentions of full test coverage,
+  // but my lack of angular testing experience is making it too time-consuming
 });

@@ -1,1 +1,16 @@
 <h1>Blake JS Test</h1>
+
+<label for="quizSelect">Please choose a quiz:</label>
+<select [(ngModel)]="selectedQuiz"
+        (change)="selectQuiz()"
+        id="quizSelect"
+        name="quizSelect">
+  <option [ngValue]="undefined" disabled>-- Select one --</option>
+  <option *ngFor="let quiz of quizzes" [ngValue]="quiz">{{ quiz.title }}</option>
+</select>
+
+<div *ngIf="selectedQuiz">
+  <h3>Questions:</h3>
+
+  <pre>{{ questions | json }}</pre>
+</div>

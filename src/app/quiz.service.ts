@@ -20,7 +20,11 @@ export class QuizService {
 
   getQuiz(id: number): Observable<Quiz> {
     return this.getAllQuizzes()
-      .map((quizzes: Quiz[]) => quizzes.find((quiz: Quiz) => quiz.id === id));
+      .map((quizzes: Quiz[]) => quizzes.find((quiz: Quiz) => quiz.id === id))
+      .map((quiz?: Quiz) => {
+        if (!quiz) throw new Error(`Could not find a quiz with ID "${id}"`);
+        return quiz;
+      });
   }
 
   getQuestions(ids?: number[]): Observable<Question[]> {

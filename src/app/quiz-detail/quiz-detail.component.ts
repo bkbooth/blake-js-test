@@ -26,21 +26,18 @@ export class QuizDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.quizId = this.route.snapshot.params['quizId'];
-    if (isNaN(Number(this.quizId))) return this.redirectToQuizList();
-    else this.quizId = Number(this.quizId);
+    this.quizId = Number(this.route.snapshot.params['quizId']);
+    if (isNaN(this.quizId)) return this.redirectToQuizList();
     console.log('Selected quiz', this.quizId);
 
     this.quiz$ = this.quizService.getQuiz(this.quizId);
-    this.quiz$.first().subscribe((quiz?: Quiz) => {
-      if (!quiz) this.redirectToQuizList();
-    });
+    this.quiz$.first().subscribe(null, () => this.redirectToQuizList());
 
     this.questions$ = this.quiz$.mergeMap((quiz: Quiz) => this.quizService.getQuestions(quiz.question_ids));
   }
 
   private redirectToQuizList(): void {
-    console.error(`Invalid quiz ID "${this.quizId}", redirecting to quiz list`);
+    console.error(`Invalid quiz ID "${this.route.snapshot.params['quizId']}", redirecting to quiz list`);
     this.router.navigate(['quizzes']);
   }
 

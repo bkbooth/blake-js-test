@@ -1,8 +1,8 @@
 <div *ngIf="started && !finished">
-  Progress: {{ currentQuizId + 1 }} out of {{ quizzes?.length }} quizzes
+  Progress: {{ currentQuizIndex + 1 }} out of {{ quizzes?.length }} quizzes
 
   <quiz-detail [quiz]="currentQuiz"
-               (complete)="goToNextQuiz()"></quiz-detail>
+               (complete)="goToNextQuiz($event)"></quiz-detail>
 </div>
 
 <div *ngIf="!started">

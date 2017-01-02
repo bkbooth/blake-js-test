@@ -6,7 +6,7 @@ import { Question } from '../question';
   name: 'numberCorrect',
 })
 export class NumberCorrectPipe implements PipeTransform {
-  transform(questions?: Question[], args?: any): any {
+  transform(questions?: Question[]): number|null {
     if (!questions) return null;
 
     return questions

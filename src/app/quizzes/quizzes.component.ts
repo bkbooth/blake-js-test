@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../quiz.service';
+import { ProgressService } from '../progress.service';
 import { Quiz } from '../quiz';
+import { Progress } from '../progress';
+import { Score } from '../score';
 
 @Component({
   templateUrl: './quizzes.component.html',
@@ -10,13 +13,14 @@ import { Quiz } from '../quiz';
 export class QuizzesComponent implements OnInit {
   public quizzes: Quiz[];
 
-  public started: boolean;
-  public finished: boolean;
-  public currentQuizId?: number;
+  public started: boolean = false;
+  public finished: boolean = false;
+  public currentQuizIndex?: number;
   public currentQuiz?: Quiz;
 
   constructor(
     private quizService: QuizService,
+    private progressService: ProgressService,
   ) { }
 
   ngOnInit(): void {
@@ -24,29 +28,48 @@ export class QuizzesComponent implements OnInit {
       .first()
       .subscribe((quizzes: Quiz[]) => this.quizzes = quizzes);
 
-    this.reset();
+    // Check for existing progress and set state accordingly
+    this.progressService.progress$
+      .combineLatest(this.quizService.getAllQuizzes())
+      .distinctUntilChanged()
+      .subscribe(([progress, quizzes]: [Progress, Quiz[]]) => {
+        if (progress.current_quiz_id === undefined) return;
+
+        const currentQuizIndex = quizzes.findIndex((quiz: Quiz) => quiz.id === progress.current_quiz_id);
+        if (currentQuizIndex < 0) return this.progressService.reset();
+        else this.started = true;
+        console.log('Continuing from existing progress. Last completed index:', currentQuizIndex);
+
+        const nextQuizIndex = currentQuizIndex + 1;
+        if (nextQuizIndex < this.quizzes.length) this.goToQuiz(nextQuizIndex);
+        else this.finished = true;
+      });
   }
 
-  goToNextQuiz(): void {
+  goToNextQuiz(score?: Score): void {
     if (!this.started) {
       this.started = true;
       return this.goToQuiz(0);
     }
 
-    const nextQuizId = this.currentQuizId + 1;
-    if (nextQuizId < this.quizzes.length) this.goToQuiz(nextQuizId);
+    this.progressService.add(score);
+
+    const nextQuizIndex = this.currentQuizIndex + 1;
+    if (nextQuizIndex < this.quizzes.length) this.goToQuiz(nextQuizIndex);
     else this.finished = true;
   }
 
-  private goToQuiz(id: number): void {
-    this.currentQuizId = id;
-    this.currentQuiz = this.quizzes[id];
+  private goToQuiz(index: number): void {
+    this.currentQuizIndex = index;
+    this.currentQuiz = this.quizzes[index];
   }
 
   reset(): void {
     this.started = false;
     this.finished = false;
-    this.currentQuizId = undefined;
+    this.currentQuizIndex = undefined;
     this.currentQuiz = undefined;
+
+    this.progressService.reset();
   }
 }

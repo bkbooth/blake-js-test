@@ -1,0 +1,16 @@
+<h2>{{ (quiz$ | async)?.title }}</h2>
+
+<p *ngFor="let question of questions$ | async; let i = index;">
+  <label for="question{{ question.id }}">{{ i + 1 }}. {{ question.question }}</label><br>
+
+  <span *ngFor="let answer of question.answers; let j = index;">
+    <input type="radio"
+           name="question{{ question.id }}"
+           [(ngModel)]="question.selected_answer"
+           [value]="j">
+    {{ answer }}
+    <br>
+  </span>
+</p>
+
+<p><a [routerLink]="['..']">&laquo; Back</a></p>

@@ -2,7 +2,9 @@
 
 <ul>
   <li *ngFor="let quiz of quizzes$ | async">
-    <strong>{{ quiz.title }}</strong>
-    ({{ quiz.question_ids.length }} questions)
+    <a [routerLink]="[quiz.id]">
+      <strong>{{ quiz.title }}</strong>
+      ({{ quiz.question_ids.length }} questions)
+    </a>
   </li>
 </ul>

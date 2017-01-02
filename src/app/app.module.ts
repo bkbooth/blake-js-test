@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { QuizListComponent } from './quiz-list';
+import { QuizDetailComponent } from './quiz-detail';
 import { QuizService } from './quiz.service';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { QuizService } from './quiz.service';
   declarations: [
     AppComponent,
     QuizListComponent,
+    QuizDetailComponent,
   ],
   providers: [
     QuizService,

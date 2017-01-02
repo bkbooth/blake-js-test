@@ -30,7 +30,9 @@ export class QuizService {
 
     return ids ?
       allQuestions$.map((questions: Question[]) =>
-        questions.filter((question: Question) => ids.includes(question.id))
+        questions
+          .filter((question: Question) => ids.includes(question.id))
+          .sort((a: Question, b: Question) => ids.indexOf(a.id) < ids.indexOf(b.id) ? -1 : 1)
       ) :
       allQuestions$;
   }

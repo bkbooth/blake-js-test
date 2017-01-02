@@ -1,47 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/first';
-import 'rxjs/add/operator/mergeMap';
 
 import { QuizService } from '../quiz.service';
 import { Quiz } from '../quiz';
 import { Question } from '../question';
 
 @Component({
+  selector: 'quiz-detail',
   templateUrl: './quiz-detail.component.html',
   styleUrls: ['./quiz-detail.component.scss'],
 })
-export class QuizDetailComponent implements OnInit {
-  public quizId: number;
-  public answersSubmitted: boolean = false;
+export class QuizDetailComponent implements OnChanges {
+  @Input() quiz: Quiz;
+  @Output() complete: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild(NgForm) quizForm;
 
-  public quiz$: Observable<Quiz>;
   public questions$: Observable<Question[]>;
+  public answersSubmitted: boolean;
 
   constructor(
     private quizService: QuizService,
-    private route: ActivatedRoute,
-    private router: Router,
   ) { }
 
-  ngOnInit(): void {
-    this.quizId = Number(this.route.snapshot.params['quizId']);
-    if (isNaN(this.quizId)) return this.redirectToQuizList();
-    console.log('Selected quiz', this.quizId);
-
-    this.quiz$ = this.quizService.getQuiz(this.quizId);
-    this.quiz$.first().subscribe(null, () => this.redirectToQuizList());
-
-    this.questions$ = this.quiz$.mergeMap((quiz: Quiz) => this.quizService.getQuestions(quiz.question_ids));
-  }
-
-  private redirectToQuizList(): void {
-    console.error(`Invalid quiz ID "${this.route.snapshot.params['quizId']}", redirecting to quiz list`);
-    this.router.navigate(['quizzes']);
+  ngOnChanges(): void {
+    this.quizForm.resetForm();
+    this.questions$ = this.quizService.getQuestions(this.quiz.question_ids);
+    this.answersSubmitted = false;
   }
 
   onQuizSubmit(): void {
     this.answersSubmitted = true;
+  }
+
+  onComplete(): void {
+    this.complete.emit();
   }
 }

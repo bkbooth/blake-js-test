@@ -33,7 +33,12 @@
     Please answer all questions before submitting
   </p>
 
-  <button type="submit" [disabled]="answersSubmitted">Submit answers</button>
+  <button type="submit"
+          [disabled]="answersSubmitted">
+    Submit answers
+  </button>
+  <button (click)="onComplete(); $event.preventDefault()"
+          [disabled]="!answersSubmitted">
+    Continue...
+  </button>
 </form>
-
-<p><a [routerLink]="['..']">&laquo; Back</a></p>

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
+import { QuizzesComponent } from './quizzes';
 import { QuizListComponent } from './quiz-list';
 import { QuizDetailComponent } from './quiz-detail';
 import { QuizService } from './quiz.service';
@@ -18,6 +19,7 @@ import { QuizService } from './quiz.service';
   ],
   declarations: [
     AppComponent,
+    QuizzesComponent,
     QuizListComponent,
     QuizDetailComponent,
   ],

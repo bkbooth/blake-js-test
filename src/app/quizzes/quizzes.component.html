@@ -1,0 +1,37 @@
+<div *ngIf="started && !finished">
+  Progress: {{ currentQuizId + 1 }} out of {{ quizzes?.length }} quizzes
+
+  <quiz-detail [quiz]="currentQuiz"
+               (complete)="goToNextQuiz()"></quiz-detail>
+</div>
+
+<div *ngIf="!started">
+  <h2>Welcome!</h2>
+
+  <p>
+    Please complete all quizzes.
+    There are {{ quizzes?.length }} quizzes in total.
+    You'll need to complete each quiz in order to access the next quiz.
+  </p>
+
+  <p>
+    Click the button below when you're ready to start the first quiz.
+  </p>
+
+  <button (click)="goToNextQuiz()"
+          [disabled]="!quizzes?.length">
+    Continue
+  </button>
+</div>
+
+<div *ngIf="finished">
+  <h2>Finished!</h2>
+
+  <p>
+    Congratulations on completing all of the quizzes.
+  </p>
+
+  <button (click)="reset()">
+    Back to start
+  </button>
+</div>

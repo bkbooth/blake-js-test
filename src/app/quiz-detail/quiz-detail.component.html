@@ -1,16 +1,39 @@
 <h2>{{ (quiz$ | async)?.title }}</h2>
 
-<p *ngFor="let question of questions$ | async; let i = index;">
-  <label for="question{{ question.id }}">{{ i + 1 }}. {{ question.question }}</label><br>
+<form (ngSubmit)="quizForm.valid && onQuizSubmit()" #quizForm="ngForm">
+  <p *ngFor="let question of questions$ | async; let i = index;">
+    <label for="question{{ question.id }}">{{ i + 1 }}. {{ question.question }}</label><br>
 
-  <span *ngFor="let answer of question.answers; let j = index;">
-    <input type="radio"
-           name="question{{ question.id }}"
-           [(ngModel)]="question.selected_answer"
-           [value]="j">
-    {{ answer }}
-    <br>
-  </span>
-</p>
+    <span *ngFor="let answer of question.answers; let j = index;">
+      <input type="radio"
+             name="question{{ question.id }}"
+             [(ngModel)]="question.selected_answer"
+             [value]="j"
+             [disabled]="answersSubmitted"
+             required>
+      {{ answer }}
+      <br>
+    </span>
+
+    <span [ngSwitch]="question.selected_answer === question.correct_answer"
+          *ngIf="answersSubmitted">
+      <span *ngSwitchCase="true"
+            class="has-success">
+        Correct!
+      </span>
+      <span *ngSwitchCase="false"
+            class="has-error">
+        Sorry, the correct answer is "{{ question.answers[question.correct_answer] }}"
+      </span>
+    </span>
+  </p>
+
+  <p *ngIf="quizForm.submitted && quizForm.invalid"
+     class="has-error">
+    Please answer all questions before submitting
+  </p>
+
+  <button type="submit" [disabled]="answersSubmitted">Submit answers</button>
+</form>
 
 <p><a [routerLink]="['..']">&laquo; Back</a></p>

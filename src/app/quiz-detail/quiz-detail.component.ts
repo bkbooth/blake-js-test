@@ -14,6 +14,8 @@ import { Question } from '../question';
 })
 export class QuizDetailComponent implements OnInit {
   public quizId: number;
+  public answersSubmitted: boolean = false;
+
   public quiz$: Observable<Quiz>;
   public questions$: Observable<Question[]>;
 
@@ -40,5 +42,9 @@ export class QuizDetailComponent implements OnInit {
   private redirectToQuizList(): void {
     console.error(`Invalid quiz ID "${this.quizId}", redirecting to quiz list`);
     this.router.navigate(['quizzes']);
+  }
+
+  onQuizSubmit(): void {
+    this.answersSubmitted = true;
   }
 }

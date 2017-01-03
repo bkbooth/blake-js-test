@@ -1,6 +1,8 @@
 import { Observable } from 'rxjs';
 
-export class HttpStubService { }
+export class HttpStubService {
+  get() { }
+}
 
 export class QuizStubService {
   getAllQuizzes() {

@@ -1,7 +1,7 @@
 <h2>{{ quiz.title }}</h2>
 
 <form (ngSubmit)="quizForm.valid && onQuizSubmit()" #quizForm="ngForm">
-  <p *ngFor="let question of questions; let i = index;">
+  <div *ngFor="let question of questions; let i = index;" class="form-group">
     {{ i + 1 }}. {{ question.question }}<br>
 
     <label *ngFor="let answer of question.answers; let j = index;">
@@ -25,7 +25,7 @@
         Sorry, the correct answer is "{{ question.answers[question.correct_answer] }}"
       </span>
     </span>
-  </p>
+  </div>
 
   <p *ngIf="quizForm.submitted && quizForm.invalid"
      class="has-error">
@@ -38,11 +38,13 @@
   </p>
 
   <button type="submit"
-          [disabled]="answersSubmitted">
+          [disabled]="answersSubmitted"
+          class="btn">
     Submit answers
   </button>
   <button (click)="onComplete(); $event.preventDefault()"
-          [disabled]="!answersSubmitted">
+          [disabled]="!answersSubmitted"
+          class="btn">
     Continue...
   </button>
 </form>

@@ -1,0 +1,25 @@
+@import './variables';
+
+.pull-right {
+  float: right;
+}
+
+.btn {
+  background: $textColor;
+  color: fade_out(white, 0.15);
+  font-size: $fontSizeBase;
+  padding: $paddingSm;
+  border: 1px solid lighten($textColor, 15%);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color $transitionFast;
+
+  &:hover:not([disabled]) {
+    background: lighten($textColor, 5%);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

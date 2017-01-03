@@ -1,0 +1,14 @@
+$colorBase: #aee2ff;
+$backgroundColor1: lighten($colorBase, 5%);
+$backgroundColor2: $colorBase;
+$textColor: darken($colorBase, 65%);
+
+$fontSizeBase: 16px;
+$fontSerif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+$fontSansSerif: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+$fontBase: $fontSansSerif;
+
+$paddingBase: 20px;
+$paddingSm: 10px;
+
+$transitionFast: 0.3s;

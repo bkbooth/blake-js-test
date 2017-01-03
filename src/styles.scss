@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+@import './variables';
+@import './utilities';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, app-root {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(135deg, $backgroundColor1 0%, $backgroundColor2 100%);
+  color: $textColor;
+  font-family: $fontBase;
+  font-size: $fontSizeBase;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5em 0 0.2em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: $textColor;
+  text-decoration: underline;
+  transition: color $transitionFast;
+  &:hover {
+    color: lighten($textColor, 15%);
+  }
+}

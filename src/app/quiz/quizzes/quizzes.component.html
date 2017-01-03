@@ -1,6 +1,8 @@
 <div *ngIf="started && !finished">
-  Progress: {{ currentQuizIndex + 1 }} out of {{ quizzes?.length }} quizzes.
-  <a [routerLink]="['/progress']">View progress</a>
+  <p>
+    Progress: {{ currentQuizIndex + 1 }} out of {{ quizzes?.length }} quizzes.
+    <a routerLink="/progress">View progress</a>
+  </p>
 
   <quiz-detail [quiz]="currentQuiz"
                (complete)="goToNextQuiz($event)"></quiz-detail>
@@ -20,8 +22,9 @@
   </p>
 
   <button (click)="goToNextQuiz()"
-          [disabled]="!quizzes?.length">
-    Continue
+          [disabled]="!quizzes?.length"
+          class="btn">
+    Continue...
   </button>
 </div>
 
@@ -33,10 +36,10 @@
   </p>
 
   <p>
-    <a [routerLink]="['/progress']">View your results here</a>
+    <a routerLink="/progress">View your results</a>
   </p>
 
-  <button (click)="reset()">
+  <button (click)="reset()" class="btn">
     Back to start
   </button>
 </div>

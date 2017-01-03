@@ -1,6 +1,18 @@
+@import '../../../variables';
+
+.form-group {
+  margin: 1em 0;
+
+  label {
+    display: block;
+    margin: 0.3em 0.5em;
+  }
+}
+
 .has-success {
   color: darkgreen;
 }
+
 .has-error {
   color: darkred;
 }

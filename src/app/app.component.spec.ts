@@ -25,6 +25,6 @@ describe('AppComponent', () => {
     let fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Blake JS Test');
+    expect(compiled.querySelector('h1').textContent).toContain('Company X');
   }));
 });

@@ -1,9 +1,15 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { QuizzesComponent } from './quizzes.component';
+import { QuizService } from '../quiz.service';
+import { ProgressService } from '../progress.service';
+import {
+  ProgressStubService,
+  QuizDetailStubComponent,
+  QuizStubService,
+  RouterLinkStubDirective,
+} from '../../../testing';
 
 describe('QuizzesComponent', () => {
   let component: QuizzesComponent;
@@ -11,7 +17,15 @@ describe('QuizzesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizzesComponent ]
+      declarations: [
+        QuizzesComponent,
+        QuizDetailStubComponent,
+        RouterLinkStubDirective,
+      ],
+      providers: [
+        { provide: QuizService, useClass: QuizStubService },
+        { provide: ProgressService, useClass: ProgressStubService },
+      ],
     })
     .compileComponents();
   }));

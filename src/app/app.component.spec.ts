@@ -1,13 +1,15 @@
 /* tslint:disable:no-unused-variable */
+import { async, TestBed } from '@angular/core/testing';
 
-import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterOutletStubComponent } from '../testing';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        RouterOutletStubComponent,
       ],
     });
     TestBed.compileComponents();
@@ -25,8 +27,4 @@ describe('AppComponent', () => {
     let compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Blake JS Test');
   }));
-
-  // TODO: add real tests
-  // I started with the best intentions of full test coverage,
-  // but my lack of angular testing experience is making it too time-consuming
 });

@@ -1,9 +1,14 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { QuizProgressComponent } from './quiz-progress.component';
+import { QuizService } from '../quiz.service';
+import { ProgressService } from '../progress.service';
+import {
+  ProgressStubService,
+  QuizStubService,
+  RouterLinkStubDirective,
+} from '../../../testing';
 
 describe('QuizProgressComponent', () => {
   let component: QuizProgressComponent;
@@ -11,7 +16,14 @@ describe('QuizProgressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizProgressComponent ]
+      declarations: [
+        QuizProgressComponent,
+        RouterLinkStubDirective,
+      ],
+      providers: [
+        { provide: QuizService, useClass: QuizStubService },
+        { provide: ProgressService, useClass: ProgressStubService },
+      ],
     })
     .compileComponents();
   }));

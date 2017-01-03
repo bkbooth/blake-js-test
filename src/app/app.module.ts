@@ -1,35 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { SharedModule } from './shared';
+import { QuizModule } from './quiz';
 import { routing } from './app.routing';
-
 import { AppComponent } from './app.component';
-import { QuizzesComponent } from './quizzes';
-import { QuizDetailComponent, NumberCorrectPipe } from './quiz-detail';
-import { QuizProgressComponent } from './quiz-progress';
-
-import { QuizService } from './quiz.service';
-import { ProgressService } from './progress.service';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
+    SharedModule,
+    QuizModule,
     routing,
   ],
   declarations: [
     AppComponent,
-    QuizzesComponent,
-    QuizDetailComponent,
-    QuizProgressComponent,
-    NumberCorrectPipe,
-  ],
-  providers: [
-    QuizService,
-    ProgressService,
   ],
   bootstrap: [AppComponent],
 })

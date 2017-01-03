@@ -17,15 +17,6 @@ export class QuizService {
       .map((response: { quizzes: Quiz[] }) => response.quizzes);
   }
 
-  getQuiz(id: number): Observable<Quiz> {
-    return this.getAllQuizzes()
-      .map((quizzes: Quiz[]) => quizzes.find((quiz: Quiz) => quiz.id === id))
-      .map((quiz?: Quiz) => {
-        if (!quiz) throw new Error(`Could not find a quiz with ID "${id}"`);
-        return quiz;
-      });
-  }
-
   getQuestions(ids?: number[]): Observable<Question[]> {
     const allQuestions$ = this.http.get('./assets/questions.json')
       .map((response: Response) => response.json())

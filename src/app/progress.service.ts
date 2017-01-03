@@ -22,11 +22,13 @@ export class ProgressService {
   add(item: Score): void {
     this.progress.current_quiz_id = item.quiz_id;
     this.progress.scores.push(item);
+    this._progress$.next(this.progress);
     localStorage.setItem(this.progressKey, JSON.stringify(this.progress));
   }
 
   reset(): void {
     this.progress = new Progress();
+    this._progress$.next(this.progress);
     localStorage.removeItem(this.progressKey);
   }
 }

@@ -6,6 +6,7 @@ import { QuizService } from '../quiz.service';
 import { ProgressService } from '../progress.service';
 import {
   ProgressStubService,
+  ProgressBarStubComponent,
   QuizDetailStubComponent,
   QuizStubService,
   RouterLinkStubDirective,
@@ -21,6 +22,7 @@ describe('QuizzesComponent', () => {
         QuizzesComponent,
         QuizDetailStubComponent,
         RouterLinkStubDirective,
+        ProgressBarStubComponent,
       ],
       providers: [
         { provide: QuizService, useClass: QuizStubService },

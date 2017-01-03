@@ -7,6 +7,9 @@
     out of
     <strong>{{ quizzes?.length }}</strong>
     quizzes.
+
+    <progress-bar [value]="progress?.scores.length"
+                  [max]="quizzes?.length"></progress-bar>
   </p>
 
   <p *ngFor="let score of progress?.scores">
@@ -16,6 +19,9 @@
     <strong>{{ score.score }}</strong>
     out of
     <strong>{{ getQuizById(score.quiz_id)?.question_ids.length }}</strong>
+
+    <progress-bar [value]="score.score"
+                  [max]="getQuizById(score.quiz_id)?.question_ids.length"></progress-bar>
   </p>
 </div>
 

@@ -1,6 +1,8 @@
 <div *ngIf="started && !finished">
   <p>
-    Progress: {{ currentQuizIndex + 1 }} out of {{ quizzes?.length }} quizzes.
+    <progress-bar [value]="currentQuizIndex + 1"
+                  [max]="quizzes?.length"></progress-bar>
+
     <a routerLink="/progress">View progress</a>
   </p>
 

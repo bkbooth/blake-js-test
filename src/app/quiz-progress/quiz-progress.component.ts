@@ -22,7 +22,7 @@ export class QuizProgressComponent implements OnInit {
     // Combine observables to make sure we have both quizzes and progress data
     this.progressService.progress$
       .combineLatest(this.quizService.getAllQuizzes())
-      .distinctUntilChanged()
+      .first()
       .subscribe(([progress, quizzes]: [Progress, Quiz[]]) => {
         this.progress = progress;
         this.quizzes = quizzes;

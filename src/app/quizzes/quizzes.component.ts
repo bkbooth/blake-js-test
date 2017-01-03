@@ -31,13 +31,14 @@ export class QuizzesComponent implements OnInit {
     // Check for existing progress and set state accordingly
     this.progressService.progress$
       .combineLatest(this.quizService.getAllQuizzes())
-      .distinctUntilChanged()
+      .first()
       .subscribe(([progress, quizzes]: [Progress, Quiz[]]) => {
         if (progress.current_quiz_id === undefined) return;
 
         const currentQuizIndex = quizzes.findIndex((quiz: Quiz) => quiz.id === progress.current_quiz_id);
         if (currentQuizIndex < 0) return this.progressService.reset();
-        else this.started = true;
+
+        this.started = true;
         console.log('Continuing from existing progress. Last completed index:', currentQuizIndex);
 
         const nextQuizIndex = currentQuizIndex + 1;
